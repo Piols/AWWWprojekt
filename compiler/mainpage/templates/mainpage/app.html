@@ -17,27 +17,7 @@
 			</nav>
 			<div class="file_select">
 				<div class="header"> Files </div>
-        <ul>
-					<li class="folder"> C programs </li>
-					<li>
-						<ul>
-							<li class="folder"> example </li>
-							<li>
-								<ul>
-								<li class="file"> quine.c </li>
-								</ul>
-							</li>
-							<li class="folder"> old </li>
-							<li>
-								<ul>
-									<li class="file"> factorial.c </li>
-									<li class="file"> fibonacci.c </li>
-									<li class="file"> IPP.c </li>
-								</ul>
-							</li>
-						</ul>
-					</li>
-        </ul>
+        {% include 'folder.html' root_folder %}
 			</div>
 			<div class="code">
 				<div class="header"> Code </div>

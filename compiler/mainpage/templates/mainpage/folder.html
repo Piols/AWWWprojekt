@@ -1,0 +1,11 @@
+<ul>
+  <li class="folder"> {folder.name} </li>
+  <li>
+    {% for subfolder in folder.subfolders.all %}
+      {% include 'folder.html' subfolder %}
+    {% endfor %}
+  </li>
+  {% for subfile in folder.subfiles.all %}
+    <li class="file"> {subfile.name} </li>
+  {% endfor %}
+</ul>
