@@ -1,0 +1,72 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8">
+      <title> 8-bit C compiler </title>
+			<link rel="stylesheet" href="{% static 'mainpage/app.css' %}">
+  </head>
+	<body onload="init()">
+		<div class="grid">
+			<nav class="menu">
+				<a> File </a>
+				<a> Edit </a>
+				<a> Options </a>
+				<a onclick="change_theme()"> Theme </a>
+			</nav>
+			<div class="file_select">
+				<div class="header"> Files </div>
+        <ul>
+					<li class="folder"> C programs </li>
+					<li>
+						<ul>
+							<li class="folder"> example </li>
+							<li>
+								<ul>
+								<li class="file"> quine.c </li>
+								</ul>
+							</li>
+							<li class="folder"> old </li>
+							<li>
+								<ul>
+									<li class="file"> factorial.c </li>
+									<li class="file"> fibonacci.c </li>
+									<li class="file"> IPP.c </li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+        </ul>
+			</div>
+			<div class="code">
+				<div class="header"> Code </div>
+				<pre>
+#include&lt;stdio.h&gt;
+char*i=&quot;\\#include&lt;stdio.h&gt;&quot;,n=&#39;\n&#39;,q=&#39;&quot;&#39;,*p=
+&quot;%s%cchar*i=%c%c%s%c,n=&#39;%cn&#39;,q=&#39;%c&#39;,*p=%c%c%s%c,*m=%c%c%s%c%c;%s%c&quot;,*m=
+&quot;int main(){return!printf(p,i+1,n,q,*i,i,q,*i,q,n,q,p,q,n,q,m,q,n,m,n);}&quot;
+;int main(){return!printf(p,i+1,n,q,*i,i,q,*i,q,n,q,p,q,n,q,m,q,n,m,n);}
+				</pre>
+			</div>
+			<div class="code_fragment">
+				<div class="header"> Code fragment </div>
+				<pre>
+int main(){return!printf(p,i+1,n,q,*i,i,q,*i,q,n,q,p,q,n,q,m,q,n,m,n);}
+				</pre>
+			</div>
+			<div class="tabs">
+				<div class="tab_bar">
+					<div class="tab">Tab1</div>
+					<div class="tab">Tab2</div>
+					<div class="tab">Tab3</div>
+					<div class="tab">Tab4</div>
+				</div>
+				<div class="tab_content">
+					<p> Click a tab to see its content. </p>
+				</div>
+			</div>
+		</div>
+		<script src="{% static 'mainpage/app.js' %}"></script>
+	</body>
+</html>
