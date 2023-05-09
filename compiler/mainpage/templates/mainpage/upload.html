@@ -1,0 +1,31 @@
+{% load static %}
+
+<!DOCTYPE html>
+<HTML lang="en">
+<HEAD>
+	<META CHARSET="utf-8">
+	<TITLE> Upload Folder </TITLE>
+</HEAD>
+<BODY>
+	{% if no_parent_folder %}
+	<p>Parent folder not available. Make sure that:</p>
+	<ul>
+		<li>Parent folder with given id exists.</li>
+		<li>Given id is not a file.</li>
+		<li>You have access to given id.</li>
+		<li>Folder is available, i.e. its parent folder was not removed.</li>
+	</ul>
+	{% else %}
+	<form enctype="multipart/form-data" method="post">
+		{% csrf_token %}
+		{% if file_upload %}
+		<input type="file" id="upload" required="required" name="upload"><br>
+		{% else %}
+		Name: <input type="text" id="name" required="required" name="name"><br>
+		{% endif %}
+		Description: <input type="text" id="description" name="description"><br>
+		<input type="submit">
+	</form>
+	{% endif %}
+</BODY>
+</HTML>

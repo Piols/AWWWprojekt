@@ -17,22 +17,26 @@
 			</nav>
 			<div class="file_select">
 				<div class="header"> Files </div>
-        {% include 'folder.html' root_folder %}
+        {% include 'mainpage/folder.html' with folder=root_folder %}
 			</div>
 			<div class="code">
-				<div class="header"> Code </div>
-				<pre>
-#include&lt;stdio.h&gt;
-char*i=&quot;\\#include&lt;stdio.h&gt;&quot;,n=&#39;\n&#39;,q=&#39;&quot;&#39;,*p=
-&quot;%s%cchar*i=%c%c%s%c,n=&#39;%cn&#39;,q=&#39;%c&#39;,*p=%c%c%s%c,*m=%c%c%s%c%c;%s%c&quot;,*m=
-&quot;int main(){return!printf(p,i+1,n,q,*i,i,q,*i,q,n,q,p,q,n,q,m,q,n,m,n);}&quot;
-;int main(){return!printf(p,i+1,n,q,*i,i,q,*i,q,n,q,p,q,n,q,m,q,n,m,n);}
-				</pre>
+				<div class="header">
+					{% if current_file %}
+						{{current_file.name}}
+					{% elif no_current_file %}
+						Sorry, no file with id exists or it's not yours.
+					{% else %}
+						Select a file to see its content
+					{% endif %}
+				</div>
+				{% if current_file %}
+					<pre>{{current_file.content}}</pre>
+				{% endif %}
 			</div>
 			<div class="code_fragment">
 				<div class="header"> Code fragment </div>
 				<pre>
-int main(){return!printf(p,i+1,n,q,*i,i,q,*i,q,n,q,p,q,n,q,m,q,n,m,n);}
+Code fragments will be implemented later.
 				</pre>
 			</div>
 			<div class="tabs">

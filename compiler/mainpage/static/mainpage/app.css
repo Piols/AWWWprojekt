@@ -94,12 +94,18 @@ pre {
 	background-color: var(--header_background_color);
 }
 
-.file_select li:hover {
+.file_select li a {
+	text-decoration: none;
+	color: var(--select_text_color);
+	background-color: var(--select_background_color);
+}
+
+.file_select li a:hover {
 	color: var(--select_text_color_hover);
 	background-color: var(--select_background_color_hover);
 }
 
-.file_select li:active {
+.file_select li a:active {
 	color: var(--select_text_color_active);
 	background-color: var(--select_background_color_active);
 }
@@ -112,11 +118,18 @@ pre {
 	padding: 0px 10px;
 }
 
+.folder {
+	color: var(--navbars_text_color);
+}
+
+.file {
+	color: var(--select_text_color);
+}
+
 .file_select li {
 	list-style-type: none;
 	padding: 0;
-
-	color: var(--select_text_color);
+	text-decoration: none;
 }
 
 .folder::before {
@@ -125,6 +138,10 @@ pre {
 
 .file::before {
 	content: '📄';
+}
+
+.file_select li .delete_symbol {
+	color:red;
 }
 
 .menu {

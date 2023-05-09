@@ -5,19 +5,16 @@ class FolderOrFile(models.Model):
 	name = models.CharField(max_length=255)
 	description = models.TextField(blank=True)
 	created_at = models.DateTimeField(auto_now_add=True)
-	owner = models.ForeignKey(User, on_delete=models.CASCADE)
+	owner = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
 	is_available = models.BooleanField(default=True)
-	availability_changed_at = models.DateTimeField(auto_now=True)
+	availability_changed_at = models.DateTimeField(auto_now_add=True)
 	last_content_change_at = models.DateTimeField(auto_now=True)
-	# W templacie {% for sub_file in file.subfolders.all %}
-	# Oddzielny template od wypisywania folderow, ktory potrafi sie rekurencyjnie wywolywac.
 
 	class Meta:
-		abstract = true
+		abstract = True
 
 class Folder(FolderOrFile):
 	parent_folder = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL, related_name = 'subfolders')
-
 
 class File(FolderOrFile):
 	content = models.TextField()

@@ -1,11 +1,19 @@
-<ul>
-  <li class="folder"> {folder.name} </li>
+﻿<ul>
+  <li class="folder"> {{folder.name}} <a href="{% url 'add_folder' folder.id %}">+📁</a> <a href="{% url 'add_file' folder.id %}">+📄</a> <a class="delete_symbol" href="{% url 'remove_folder' folder.id %}">⌫</a></li>
   <li>
     {% for subfolder in folder.subfolders.all %}
-      {% include 'folder.html' subfolder %}
+			{% if subfolder.is_available %}
+			 {% include 'mainpage/folder.html' with folder=subfolder %}
+			{% endif %}
     {% endfor %}
   </li>
-  {% for subfile in folder.subfiles.all %}
-    <li class="file"> {subfile.name} </li>
-  {% endfor %}
+	<li>
+		<ul>
+			{% for subfile in folder.subfiles.all %}
+				{% if subfile.is_available %}
+					<li class="file"> <a href="{% url 'view_file' subfile.id %}">{{subfile.name}}</a> <a class="delete_symbol" href="{% url 'remove_file' subfile.id %}">⌫</a></li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+	</li>
 </ul>
