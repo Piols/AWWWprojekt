@@ -58,7 +58,9 @@ body {
 }
 
 pre {
-	overflow: scroll;
+	overflow-x: scroll;
+	overflow-y: scroll;
+	height: 90%;
 }
 
 .menu, .tab_bar {
@@ -75,14 +77,20 @@ pre {
 	background-color: var(--code_background_color);
 }
 
-.menu > a:hover, .tab:hover {
+.menu > a:hover, .menu > button:hover, .tab:hover {
 	color: var(--navbars_text_color_hover);
 	background-color: var(--navbars_background_color_hover);
 }
 
-.menu > a:active, .tab:active {
+.menu > a:active, .menu > button:active, .tab:active {
 	color: var(--navbars_text_color_active);
 	background-color: var(--navbars_background_color_active);
+}
+
+.menu > button {
+	background: none;
+	border: none;
+	padding: 0;
 }
 
 .header {
@@ -160,13 +168,22 @@ pre {
 	height: 90%;
 }
 
-.tab_content > p {
+.tab_content p {
 	padding: 10px;
 	margin: 0;
 	color: var(--select_text_color);
 }
 
-.menu > a {
+.tab_content label {
+	color: var(--select_text_color);
+}
+
+.tab_content select, .tab_content input {
+	padding: 5px;
+	margin: 0px 3px 0px 10px;
+}
+
+.menu > a, .menu > button {
 	font-size: xx-large;
 }
 
@@ -174,13 +191,14 @@ pre {
 	font-size: x-large;
 }
 
-.menu > a, .tab {
+.menu > a, .menu > button, .tab {
 	display: inline-flex;
 	height: 100%;
 	padding: 0 20px;
 	margin: 0;
 	align-items: center;
 	text-decoration: none;
+	color: var(--navbars_text_color);
 }
 
 @media all and (min-width: 1001px) and (max-aspect-ratio: 4/3) and (not (aspect-ratio: 4/3)) {

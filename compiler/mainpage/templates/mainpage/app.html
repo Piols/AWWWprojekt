@@ -11,9 +11,13 @@
 		<div class="grid">
 			<nav class="menu">
 				<a> File </a>
-				<a> Edit </a>
-				<a> Options </a>
-				<a onclick="change_theme()"> Theme </a>
+				{% if current_file %}
+					<button type="submit" form="compile" formaction="/mainpage/{{current_file.id}}/">Compile</button>
+				{% endif %}
+				{% if code_fragment %}
+					<a href="{% url 'download' current_file.id%}">Download result</a>
+				{% endif %}
+				<a onclick="change_theme();"> Theme </a>
 			</nav>
 			<div class="file_select">
 				<div class="header"> Files </div>
@@ -30,24 +34,66 @@
 					{% endif %}
 				</div>
 				{% if current_file %}
-					<pre>{{current_file.content}}</pre>
+				<pre>{{ current_file.content}}</pre>
 				{% endif %}
 			</div>
 			<div class="code_fragment">
 				<div class="header"> Code fragment </div>
-				<pre>
-Code fragments will be implemented later.
-				</pre>
+					{% if code_fragment %}
+					<pre>{{ code_fragment}}</pre>
+					{% else %}
+					<p style="padding-left:10px">Compile to see compilation results.</p>
+					{% endif %}
 			</div>
 			<div class="tabs">
 				<div class="tab_bar">
-					<div class="tab">Tab1</div>
-					<div class="tab">Tab2</div>
-					<div class="tab">Tab3</div>
-					<div class="tab">Tab4</div>
+					<div class="tab" id="standard" onclick="change_tab(this);">Standard</div>
+					<div class="tab" id="optimization" onclick="change_tab(this);">Optimization</div>
+					<div class="tab" id="processor" onclick="change_tab(this);">Processor</div>
+					<div class="tab" id="dependent" onclick="change_tab(this);">Dependent</div>
 				</div>
 				<div class="tab_content">
-					<p> Click a tab to see its content. </p>
+					<form id="compile" enctype="multipart/form-data" method="post">
+						{% csrf_token %}
+						<div id="tab_default_content">
+							<p> Click a tab to see its content. </p>
+						</div>
+						<div id="tab_standard_content" style="display: none;">
+							<p> Standard: </p>
+							<select id="Standard" name="standard" required>
+								<option value="--std-c89">C89</option>
+								<option value="--std-c99">C99</option>
+								<option value="--std-c11">C11</option>
+							</select>
+						</div>
+						<div id="tab_optimizations_content" style="display: none;">
+							<p> Optimization flag: </p>
+							<input type="checkbox" id="no_loop_reverse" value="--noloopreverse" name="no_loop_reverse">
+							<label for="O2">No loop reverse</label>
+							<br>
+							<input type="checkbox" id="allow_unsafe_read" value="--allow-unsafe-read" name="allow_unsafe_read">
+							<label for="Os">Allow unsafe read</label>
+							<br>
+							<input type="checkbox" id="opt_code_size" value="--opt-code-size"  name="opt_code_size">
+							<label for="Flto">Optimize for code size</label>
+						</div>
+						<div id="tab_processor_content" style="display: none;">
+							<p> Processor: </p>
+							<select id="Processor" name="processor" required>
+								<option value="-mmcs51">MCS51</option>
+								<option value="-mz80">Z80</option>
+								<option value="-mstm8">STM8</option>
+							</select>
+						</div>
+						<div id="tab_dependent_content" style="display: none;">
+							<p id="dep_desc"> Select the processor for processor specific options here. </p>
+							<select id="Dependent" name="dependent" required>
+								<option id="dep_op_1" value="">None</option>
+								<option id="dep_op_2" value="">None</option>
+								<option id="dep_op_3" value="">None</option>
+							</select>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
